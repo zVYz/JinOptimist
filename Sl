@@ -1,0 +1,63 @@
+using System.Diagnostics.Metrics;
+
+Console.WriteLine("Guess the number");
+
+var theNumber = 7;
+int userGuess;
+var attepmtCount = 0;
+int Num = 10;
+int Dip = 100;
+
+do
+{
+    bool isItWasANumber;
+    do
+    {
+        Console.WriteLine("What is you guess?\nBetween 0 to "+ Dip);
+        var userGuessString = Console.ReadLine();
+
+
+        isItWasANumber = Int32.TryParse(userGuessString, out userGuess);
+        if (!isItWasANumber)
+        {
+            Console.WriteLine("It was not a number");
+        }
+    } while (!isItWasANumber);
+
+    attepmtCount++;
+    Dip -= userGuess;
+    if (userGuess == theNumber)
+    {
+        Console.WriteLine("Yes");
+        
+    }
+    else if (attepmtCount > Num)
+    {
+        Console.WriteLine("No");
+        break;
+    }
+    else if (userGuess > Dip)
+    {
+        Console.WriteLine("Попробуйте снова!");
+        attepmtCount--;
+        
+        continue;
+    }
+    else if (userGuess > theNumber)
+    {
+        Console.WriteLine("Ваше число больше");
+    }
+    else if  (userGuess < theNumber)
+    {
+        Console.WriteLine("Ваше число меньше");
+    }
+    else if (userGuess < Num)
+    {
+        
+    }
+    Console.WriteLine("У вас осталась: " + (10 - attepmtCount));
+
+} while (theNumber != userGuess);
+
+Console.WriteLine($"Cool, you spend {attepmtCount-1} points");
+Console.ReadLine();
